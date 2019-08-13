@@ -119,7 +119,7 @@ class TraktInstance(object):
                 imdb_url = show.get_key('imdb')
                 if imdb_id is not None and imdb_url != imdb_id:
                     continue
-                for (season, epi), episode in show.episodes():
+                for (season, epi), _ in show.episodes():
                     results.append({
                         'title': title,
                         'imdb_url': imdb_url,
@@ -355,7 +355,6 @@ class TraktInstance(object):
         if cal is None:
             return []
         for ep_ in cal:
-            show = ep_.show.title
             season, episode = ep_.pk
             airdate = ep_.first_aired.date()
 
@@ -367,9 +366,6 @@ class TraktInstance(object):
             imdb_url = ep_.show.get_key('imdb')
             ep_url = ep_.get_key('imdb')
 
-            eprating, rating = -1, -1
-            title = show
-            eptitle = ep_.title
             output.append({
                 'show': ep_.show.title,
                 'link': imdb_url,

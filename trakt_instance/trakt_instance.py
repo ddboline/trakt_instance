@@ -12,6 +12,7 @@ from dateutil.parser import parse
 import datetime
 from threading import Condition
 import argparse
+import json
 
 from trakt import Trakt
 
@@ -379,69 +380,69 @@ class TraktInstance(object):
 
 def get_watchlist():
     ti = TraktInstance()
-    return ti.get_watchlist_shows()
+    return json.dumps(ti.get_watchlist_shows())
 
 
 def get_watched_show(imdb_id):
     ti = TraktInstance()
-    return ti.get_watched_shows(imdb_id=imdb_id)
+    return json.dumps(ti.get_watched_shows(imdb_id=imdb_id))
 
 
 def get_watched_shows():
     ti = TraktInstance()
-    return ti.get_watched_shows()
+    return json.dumps(ti.get_watched_shows())
 
 
 def get_watched_movie(imdb_id):
     ti = TraktInstance()
-    return ti.get_watched_movies(imdb_id=imdb_id)
+    return json.dumps(ti.get_watched_movies(imdb_id=imdb_id))
 
 
 def get_watched_movies():
     ti = TraktInstance()
-    return ti.get_watched_movies()
+    return json.dumps(ti.get_watched_movies())
 
 
 def do_trakt_query(query_str):
     ti = TraktInstance()
-    return ti.do_query(query_str)
+    return json.dumps(ti.do_query(query_str))
 
 
 def do_trakt_lookup(imdb_id):
     ti = TraktInstance()
-    return ti.do_lookup(imdb_id=imdb_id).to_dict()
+    return json.dumps(ti.do_lookup(imdb_id=imdb_id).to_dict())
 
 
 def add_episode_to_watched(imdb_id, season, episode):
     ti = TraktInstance()
     result = ti.add_episode_to_watched(imdb_id=imdb_id, season=int(season), episode=int(episode))
     if result:
-        return {'status': 'success'}
+        return True
     else:
-        return {'status': 'failure'}
+        return False
 
 
 def add_to_watched(imdb_id):
     ti = TraktInstance()
     result = ti.add_movie_to_watched(imdb_id=imdb_id)
     if result:
-        return {'status': 'success'}
+        return True
     else:
-        return {'status': 'failure'}
+        return False
 
 
 def get_trakt_cal():
     ti = TraktInstance()
-    return ti.get_trakt_cal_episode()
+    return json.dumps(ti.get_trakt_cal_episode())
 
 
 def delete_show_from_watchlist(imdb_id):
     ti_ = TraktInstance()
     result = ti_.remove_show_to_watchlist(imdb_id=imdb_id)
     if result:
-        return {'status': 'success'}
+        return True
     else:
-        return {'status': 'failure'}
+        return False
 
 
 def delete_episode_from_watched(imdb_id, season, episode):
@@ -449,24 +450,24 @@ def delete_episode_from_watched(imdb_id, season, episode):
     result = ti_.remove_episode_to_watched(
         imdb_id=imdb_id, season=int(season), episode=int(episode))
     if result:
-        return {'status': 'success'}
+        return True
     else:
-        return {'status': 'failure'}
+        return False
 
 
 def delete_movie_from_watched(imdb_id):
     ti_ = TraktInstance()
     result = ti_.remove_movie_to_watched(imdb_id=imdb_id)
     if result:
-        return {'status': 'success'}
+        return True
     else:
-        return {'status': 'failure'}
+        return False
 
 
 def add_to_watchlist(imdb_id):
     ti = TraktInstance()
     result = ti.add_show_to_watchlist(imdb_id=imdb_id)
     if result:
-        return {'status': 'success'}
+        return True
     else:
-        return {'status': 'failure'}
+        return False

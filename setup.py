@@ -12,7 +12,7 @@ v = sys.version_info.major
 
 setup(
     name='trakt_instance',
-    version='0.0.3',
+    version='0.0.4',
     author='Daniel Boline',
     author_email='ddboline@gmail.com',
     description='Wrapper around trakt.py',

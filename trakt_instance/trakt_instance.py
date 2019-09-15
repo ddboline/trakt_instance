@@ -13,12 +13,9 @@ import datetime
 from threading import Condition
 import argparse
 import json
-import warnings
-from arrow.factory import ArrowParseWarning
 
 from trakt import Trakt
 
-warnings.simplefilter("ignore", ArrowParseWarning)
 list_of_commands = ('list', 'search', 'add', 'cal', 'rm')
 help_text = 'commands=%s,[number]' % ','.join(list_of_commands)
 
